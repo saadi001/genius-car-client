@@ -6,7 +6,7 @@ import Header from '../../pages/shared/Header/Header';
 const Main = () => {
      return (
           <div>
-               <Header></Header>
+               <Header></Header>               
                <Outlet></Outlet>
                <Footer></Footer>
           </div>
