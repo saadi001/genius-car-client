@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
+     const {signIn} = useContext(AuthContext);
 
      const handleForm = (event) =>{
           event.preventDefault();
+          const form = event.target;
+          const email = form.email.value;
+          const passowrd = form.password.value;
+
+          signIn(email, passowrd)
+          .then(result =>{
+               const user = result.user;
+               form.reset();
+               console.log(user);
+          })
+          .catch(err => console.error(err))
      }
      return (
           <div className="hero my-5">
