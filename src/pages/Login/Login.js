@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Login = () => {
      const {signIn} = useContext(AuthContext);
+     const navigate = useNavigate();
 
      const handleForm = (event) =>{
           event.preventDefault();
@@ -16,6 +17,7 @@ const Login = () => {
           .then(result =>{
                const user = result.user;
                form.reset();
+               navigate('/')
                console.log(user);
           })
           .catch(err => console.error(err))
@@ -41,7 +43,7 @@ const Login = () => {
                                    </label>
                                    <input type="text" name='password' placeholder="password" className="input input-bordered" />
                                    <label className="label">
-                                        <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
+                                        <a href="/" className="label-text-alt link link-hover">Forgot password?</a>
                                    </label>
                               </div>
                               <div className="form-control mt-6">
