@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-const OrderRow = ({ order }) => {
-     const {_id, serviceName, customer, price, email, phone,service } = order;
+const OrderRow = ({ order,handleDelete,handleStatusUpdate }) => {
+     const {_id, serviceName, customer, price, email, phone,service, status } = order;
      const [orderService, setOrderService] = useState({});
 
      useEffect(()=>{
@@ -9,17 +9,9 @@ const OrderRow = ({ order }) => {
           .then(res => res.json())
           .then(data => setOrderService(data))
      },[service])
+     
 
-     const handleDelete = (id) =>{
-          const proceed = window.confirm('Are you sure to cancel order?')
-          if(proceed){
-               fetch(`http://localhost:5000/orders/${id}`,{
-                    method: 'DELETE'
-               })
-               .then(res => res.json())
-               .then(data => console.log(data))
-          }
-     }
+     
      return (
           <tr>
                <th>
@@ -34,7 +26,7 @@ const OrderRow = ({ order }) => {
                          <div className="avatar">
                               <div className="mask rounded w-24 h-24">
                                    {    orderService?.img && 
-                                        <img src={orderService.img} alt="Avatar Tailwind CSS Component" />}
+                                        <img src={orderService?.img} alt="Avatar Tailwind CSS Component" />}
                               </div>
                          </div>
                          <div>
@@ -46,11 +38,11 @@ const OrderRow = ({ order }) => {
                <td>
                    {serviceName}
                     <br />
-                    <span className="badge badge-ghost badge-sm">{price}</span>
+                    <span className="badge badge-ghost badge-sm text-left">Price: {price}</span>
                </td>
                <td>{email}</td>
                <th>
-                    <button className="btn btn-ghost btn-xs">details</button>
+                    <button onClick={()=>handleStatusUpdate(_id)} className="btn btn-ghost btn-sm">{status ? status : "pending"}</button>
                </th>
           </tr>
      );

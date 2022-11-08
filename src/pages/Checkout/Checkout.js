@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const Checkout = () => {
@@ -56,7 +56,7 @@ const Checkout = () => {
                     </div>
                     <textarea name='message' className="textarea textarea-bordered w-full my-4" placeholder="Bio"></textarea>
                     <button type='submit' className='btn btn-warning mr-2'>place order</button>
-                    <button className='btn btn-outline btn-warning'>check orders</button>
+                    <Link to='/orders'><button className='btn btn-outline btn-warning'>check orders</button></Link>
                </form>
           </div>
      );
