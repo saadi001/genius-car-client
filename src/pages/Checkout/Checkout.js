@@ -19,7 +19,9 @@ const Checkout = () => {
                serviceName: title,
                price, 
                customer: name,
-               email, phone, message
+               email, 
+               phone, 
+               message
           }
 
           fetch('http://localhost:5000/orders',{
@@ -47,13 +49,14 @@ const Checkout = () => {
                     <h2 className='text-4xl font-semibold text-center'>You are about to order: {title}</h2>
                     <h4 className='text-xl text-center mb-2'>Price: {price}</h4>
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                         <input type="text" name='firstName' placeholder="first name"  className="input input-bordered w-full" />
+                         <input type="text" name='firstName' placeholder="first name"  className="input input-bordered w-full" required/>
                          <input type="text" name='lastName' placeholder="last name" className="input input-bordered w-full" />
-                         <input type="text"  name='phone' placeholder="your phone" className="input input-bordered w-full" />
+                         <input type="text"  name='phone' placeholder="your phone" className="input input-bordered w-full" required/>
                          <input type="text" name='email' placeholder="your email" defaultValue={user?.email} className="input input-bordered w-full" readOnly/>
                     </div>
                     <textarea name='message' className="textarea textarea-bordered w-full my-4" placeholder="Bio"></textarea>
-                    <button type='submit' className='btn btn-warning'>place order</button>
+                    <button type='submit' className='btn btn-warning mr-2'>place order</button>
+                    <button className='btn btn-outline btn-warning'>check orders</button>
                </form>
           </div>
      );

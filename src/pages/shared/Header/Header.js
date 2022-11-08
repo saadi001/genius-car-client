@@ -2,12 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/logo.svg';
 
-
 const Header = () => {
+     
      const menuItems = <>
           <li className='font-semibold'><Link to='/'>Home</Link></li>
-          <li className='font-semibold'><Link to='/login'>Login</Link></li>
-          <li className='font-semibold'><Link to='/signup'>Sign up</Link></li>
+          {
+
+          }
+          <li className='font-semibold'><Link to='/orders'>orders</Link></li>
      </>
      return (
           <div className="navbar bg-base-100">
