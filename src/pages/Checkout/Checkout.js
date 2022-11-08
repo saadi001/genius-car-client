@@ -5,6 +5,7 @@ import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 const Checkout = () => {
      const { title, price, _id } = useLoaderData();
      const {user} = useContext(AuthContext);
+
      const handleCheckout = (event) =>{
           event.preventDefault();
           const form = event.target;
@@ -20,6 +21,25 @@ const Checkout = () => {
                customer: name,
                email, phone, message
           }
+
+          fetch('http://localhost:5000/orders',{
+               method: 'POST', 
+               headers: {
+                    'content-type' : 'application/json'
+               },
+               body: JSON.stringify(order)
+          })
+          .then(res => res.json())
+          .then(data => {
+               console.log(data)
+               if(data.acknowledged){
+                    alert('order placed successfully')
+                    form.reset();
+               }
+          })
+          .catch(err => console.error(err))
+          
+
      }
      return (
           <div>
@@ -33,7 +53,7 @@ const Checkout = () => {
                          <input type="text" name='email' placeholder="your email" defaultValue={user?.email} className="input input-bordered w-full" readOnly/>
                     </div>
                     <textarea name='message' className="textarea textarea-bordered w-full my-4" placeholder="Bio"></textarea>
-                    <button type='submit' className='btn btn-warning'>submit</button>
+                    <button type='submit' className='btn btn-warning'>place order</button>
                </form>
           </div>
      );
